@@ -1,0 +1,148 @@
+:root {
+  --bg-app: #0f0f13;
+  --bg-panel: #18181b;
+  --bg-card: #222226;
+  --bg-card-hover: #2a2a2e;
+
+  --text-primary: #ffffff;
+  --text-secondary: #a1a1aa;
+  --text-muted: #71717a;
+
+  --accent-primary: #8b5cf6;
+  /* Violet */
+  --accent-secondary: #ec4899;
+  /* Pink */
+  --accent-glow: rgba(139, 92, 246, 0.5);
+
+  --border-subtle: #27272a;
+  --border-highlight: #3f3f46;
+
+  --font-main: 'Outfit', sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--font-main);
+  background-color: var(--bg-app);
+  color: var(--text-primary);
+  -webkit-font-smoothing: antialiased;
+  height: 100vh;
+  overflow: hidden;
+}
+
+#root {
+  height: 100%;
+}
+
+/* Layout Utilities */
+.app-container {
+  display: flex;
+  height: 100%;
+  width: 100%;
+}
+
+.sidebar {
+  width: 260px;
+  background-color: var(--bg-panel);
+  border-right: 1px solid var(--border-subtle);
+  display: flex;
+  flex-direction: column;
+  padding: 1.5rem;
+  flex-shrink: 0;
+}
+
+.main-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  background-color: var(--bg-app);
+  overflow: hidden;
+}
+
+.board-container {
+  flex: 1;
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding: 0 1.5rem 1.5rem 1.5rem;
+}
+
+.board-columns {
+  display: flex;
+  height: 100%;
+  gap: 1.5rem;
+  min-width: max-content;
+}
+
+.column {
+  display: flex;
+  flex-direction: column;
+  width: 320px;
+  height: 100%;
+  flex-shrink: 0;
+  position: relative;
+  border-radius: 12px;
+  z-index: 0;
+}
+
+.column::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(24, 24, 27, 0.4);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 12px;
+  z-index: -1;
+}
+
+.column-header {
+  padding: 1rem;
+  border-bottom: 1px solid var(--border-subtle);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+  /* Ensure it sits above ::before if needed */
+}
+
+.column-content {
+  flex: 1;
+  padding: 0.75rem;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--border-highlight);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--text-muted);
+}
+
+/* Text & Colors */
+.text-gradient {
+  background: linear-gradient(to right, var(--accent-primary), var(--accent-secondary));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
