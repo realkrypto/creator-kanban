@@ -30,7 +30,7 @@ export default function Settings() {
     };
 
     return (
-        <div style={{ padding: '2rem', maxWidth: '800px', margin: '0 auto' }}>
+        <div className="settings-container" style={{ padding: '2rem', maxWidth: '800px', margin: '0 auto' }}>
             <h2 style={{ fontSize: '1.5rem', fontWeight: 'bold', marginBottom: '2rem' }}>Settings</h2>
 
             {/* Account Section */}

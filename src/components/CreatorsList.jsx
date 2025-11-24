@@ -43,7 +43,7 @@ export default function CreatorsList({ leads, onSelectCreator }) {
                 </div>
             </div>
 
-            <div style={{
+            <div className="creators-table-container" style={{
                 flex: 1,
                 backgroundColor: 'rgba(24, 24, 27, 0.4)',
                 backdropFilter: 'blur(12px)',
@@ -54,7 +54,7 @@ export default function CreatorsList({ leads, onSelectCreator }) {
                 flexDirection: 'column'
             }}>
                 {/* Header */}
-                <div style={{
+                <div className="creators-table-header" style={{
                     display: 'grid',
                     gridTemplateColumns: '2fr 1fr 1fr 2fr 40px',
                     padding: '1rem 1.5rem',
@@ -66,9 +66,9 @@ export default function CreatorsList({ leads, onSelectCreator }) {
                     letterSpacing: '0.05em'
                 }}>
                     <div>Creator</div>
-                    <div>Country</div>
-                    <div>Stage</div>
-                    <div>Games</div>
+                    <div className="hide-mobile">Country</div>
+                    <div className="hide-mobile">Stage</div>
+                    <div className="hide-mobile">Games</div>
                     <div></div>
                 </div>
 
@@ -78,6 +78,7 @@ export default function CreatorsList({ leads, onSelectCreator }) {
                         <div
                             key={lead.id}
                             onClick={() => onSelectCreator(lead.id)}
+                            className="creators-table-row"
                             style={{
                                 display: 'grid',
                                 gridTemplateColumns: '2fr 1fr 1fr 2fr 40px',
@@ -92,15 +93,18 @@ export default function CreatorsList({ leads, onSelectCreator }) {
                         >
                             <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
                                 <img src={lead.avatar} alt={lead.name} style={{ width: '32px', height: '32px', borderRadius: '50%', objectFit: 'cover' }} />
-                                <span style={{ color: 'var(--text-primary)', fontWeight: 500 }}>{lead.name}</span>
+                                <div style={{ display: 'flex', flexDirection: 'column' }}>
+                                    <span style={{ color: 'var(--text-primary)', fontWeight: 500 }}>{lead.name}</span>
+                                    <span className="show-mobile" style={{ display: 'none', fontSize: '0.75rem', color: 'var(--text-secondary)' }}>{lead.stage} • {lead.country}</span>
+                                </div>
                             </div>
 
-                            <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', color: 'var(--text-secondary)', fontSize: '0.875rem' }}>
+                            <div className="hide-mobile" style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', color: 'var(--text-secondary)', fontSize: '0.875rem' }}>
                                 <MapPin size={14} />
                                 {lead.country}
                             </div>
 
-                            <div>
+                            <div className="hide-mobile">
                                 <span style={{
                                     padding: '0.25rem 0.75rem',
                                     borderRadius: '9999px',
@@ -115,7 +119,7 @@ export default function CreatorsList({ leads, onSelectCreator }) {
                                 </span>
                             </div>
 
-                            <div style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap' }}>
+                            <div className="hide-mobile" style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap' }}>
                                 {lead.games.slice(0, 2).map(game => (
                                     <span key={game} style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>{game}</span>
                                 ))}

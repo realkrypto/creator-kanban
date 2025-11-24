@@ -15,6 +15,7 @@ function App() {
     const [data, setData] = useState(initialData);
     const [currentView, setCurrentView] = useState('dashboard'); // 'dashboard', 'creators', 'detail', 'settings'
     const [selectedCreatorId, setSelectedCreatorId] = useState(null);
+    const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
     useEffect(() => {
         const currentUser = authService.getCurrentUser();
@@ -36,6 +37,7 @@ function App() {
     const handleNavigate = (view, creatorId = null) => {
         setCurrentView(view);
         if (creatorId) setSelectedCreatorId(creatorId);
+        setIsSidebarOpen(false); // Close sidebar on mobile when navigating
     };
 
     const handleAddNote = (leadId, note) => {
@@ -128,8 +130,45 @@ function App() {
 
     return (
         <div className="app-container">
+            {/* Mobile Header */}
+            <div className="mobile-header" style={{
+                display: 'none', // Hidden by default, shown via CSS media query
+                position: 'fixed',
+                top: 0,
+                left: 0,
+                right: 0,
+                height: '60px',
+                backgroundColor: 'var(--bg-panel)',
+                borderBottom: '1px solid var(--border-subtle)',
+                zIndex: 45,
+                alignItems: 'center',
+                padding: '0 1rem',
+                justifyContent: 'space-between'
+            }}>
+                <button
+                    onClick={() => setIsSidebarOpen(true)}
+                    style={{ background: 'none', border: 'none', color: 'white', cursor: 'pointer' }}
+                >
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                        <line x1="3" y1="12" x2="21" y2="12"></line>
+                        <line x1="3" y1="6" x2="21" y2="6"></line>
+                        <line x1="3" y1="18" x2="21" y2="18"></line>
+                    </svg>
+                </button>
+                <span style={{ fontWeight: 'bold', fontSize: '1.125rem' }}>OVDR BizDev</span>
+                <div style={{ width: '24px' }}></div> {/* Spacer for centering */}
+            </div>
+
+            {/* Sidebar Overlay */}
+            {isSidebarOpen && (
+                <div
+                    className="sidebar-overlay"
+                    onClick={() => setIsSidebarOpen(false)}
+                />
+            )}
+
             {/* Sidebar */}
-            <aside className="sidebar">
+            <aside className={`sidebar ${isSidebarOpen ? 'open' : ''}`}>
                 <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '2rem' }}>
                     <div style={{
                         width: '32px',

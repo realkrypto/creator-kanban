@@ -74,7 +74,7 @@ export default function Board({ data, setData, onCardClick, onAddLead }) {
     return (
         <div style={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
             <div style={{ padding: '1.5rem', paddingBottom: 0 }}>
-                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', marginBottom: '1.5rem' }}>
+                <div className="board-header" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', marginBottom: '1.5rem', flexWrap: 'wrap', gap: '1rem' }}>
                     <div>
                         <h2 style={{ fontSize: '1.5rem', fontWeight: 'bold', color: 'white', marginBottom: '0.25rem' }}>Campaign Overview</h2>
                         <p style={{ color: 'var(--text-secondary)' }}>Manage your creator partnerships</p>
